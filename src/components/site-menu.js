@@ -1,28 +1,23 @@
-export const createSiteMenuTemplate = () => {
+const createSiteMenuMarkup = (item, isChecked) => {
+  const {code, name} = item;
+  return (
+    `<input
+        type="radio"
+        name="control"
+        id="control__${code}"
+        class="control__input visually-hidden"
+        ${isChecked ? `checked` : ``}
+    />
+    <label for="control__${code}" class="control__label control__label--${code}">${name}</label>`
+  );
+};
+
+export const createSiteMenuTemplate = (menuItems) => {
+  const siteMenuMarkup = menuItems.map((it, i) => createSiteMenuMarkup(it, i === 1)).join(`\n`);
+
   return (
     `<section class="control__btn-wrap">
-            <input
-                type="radio"
-                name="control"
-                id="control__new-task"
-                class="control__input visually-hidden"
-            />
-            <label for="control__new-task" class="control__label control__label--new-task">+ ADD NEW TASK</label>
-            <input
-                type="radio"
-                name="control"
-                id="control__task"
-                class="control__input visually-hidden"
-                checked
-            />
-            <label for="control__task" class="control__label">TASKS</label>
-            <input
-                type="radio"
-                name="control"
-                id="control__statistic"
-                class="control__input visually-hidden"
-            />
-            <label for="control__statistic" class="control__label">STATISTICS</label>
-        </section>`
+      ${siteMenuMarkup}
+    </section>`
   );
 };
