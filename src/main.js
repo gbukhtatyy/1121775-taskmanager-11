@@ -9,7 +9,7 @@ import TaskEditComponent from "./components/task-edit.js";
 import LoadMoreButtonComponent from "./components/load-more-button.js";
 
 // Import constants and utils
-import {RenderPosition, render} from "./utils.js";
+import {RenderPosition, render, isEscEvent} from "./utils.js";
 
 // Import mocks
 import {generateFilters} from "./mock/filter.js";
@@ -22,22 +22,35 @@ const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
 
 // Define render functions
 const renderTask = (taskListElement, task) => {
-  const onEditButtonClick = () => {
+  const replaceTaskToEdit = () => {
     taskListElement.replaceChild(taskEditComponent.getElement(), taskComponent.getElement());
   };
 
-  const onEditFormSubmit = (evt) => {
-    evt.preventDefault();
+  const replaceEditToTask = () => {
     taskListElement.replaceChild(taskComponent.getElement(), taskEditComponent.getElement());
+  };
+
+  const onEscKeyDown = (evt) => {
+    isEscEvent(evt, () => {
+      replaceEditToTask();
+      document.removeEventListener(`keydown`, onEscKeyDown);
+    });
   };
 
   const taskComponent = new TaskComponent(task);
   const editButton = taskComponent.getElement().querySelector(`.card__btn--edit`);
-  editButton.addEventListener(`click`, onEditButtonClick);
+  editButton.addEventListener(`click`, () => {
+    replaceTaskToEdit();
+    document.addEventListener(`keydown`, onEscKeyDown);
+  });
 
   const taskEditComponent = new TaskEditComponent(task);
   const editForm = taskEditComponent.getElement().querySelector(`form`);
-  editForm.addEventListener(`submit`, onEditFormSubmit);
+  editForm.addEventListener(`submit`, (evt) => {
+    evt.preventDefault();
+    replaceEditToTask();
+    document.removeEventListener(`keydown`, onEscKeyDown);
+  });
 
   render(taskListElement, taskComponent.getElement(), RenderPosition.BEFOREEND);
 };
