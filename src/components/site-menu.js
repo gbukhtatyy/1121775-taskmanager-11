@@ -1,3 +1,6 @@
+import {SITE_MENU_ITEMS} from "../const.js";
+import {createElement} from "../utils.js";
+
 const createSiteMenuMarkup = (item, isChecked) => {
   const {code, name} = item;
   return (
@@ -12,7 +15,7 @@ const createSiteMenuMarkup = (item, isChecked) => {
   );
 };
 
-export const createSiteMenuTemplate = (menuItems) => {
+const createSiteMenuTemplate = (menuItems) => {
   const siteMenuMarkup = menuItems.map((it, i) => createSiteMenuMarkup(it, i === 1)).join(`\n`);
 
   return (
@@ -21,3 +24,27 @@ export const createSiteMenuTemplate = (menuItems) => {
     </section>`
   );
 };
+
+export default class SiteMenu {
+  constructor() {
+    this._menuItems = SITE_MENU_ITEMS;
+
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createSiteMenuTemplate(this._menuItems);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
