@@ -1,8 +1,21 @@
 import {MONTH_NAMES} from "./const";
 
+const KEY_CODE_ESC = 27;
+
 export const RenderPosition = {
   AFTERBEGIN: `afterbegin`,
   BEFOREEND: `beforeend`
+};
+
+/**
+ * Execute callback if press ESC
+ * @param {Object} evt event
+ * @param {*} action callback
+ */
+export const isEscEvent = (evt, action) => {
+  if (evt.keyCode === KEY_CODE_ESC) {
+    action();
+  }
 };
 
 /**
