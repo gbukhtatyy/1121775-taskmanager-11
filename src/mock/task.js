@@ -1,5 +1,5 @@
 import {COLORS} from "../const.js";
-import {getRandomInt, getRandomElementArray, getRandomDate} from "../utils.js";
+import {getRandomInt, getRandomElementArray, getRandomDate} from "../utils/common.js";
 
 const DescriptionItems = [
   `Изучить теорию`,

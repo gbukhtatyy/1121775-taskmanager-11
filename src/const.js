@@ -41,14 +41,3 @@ export const SITE_MENU_ITEMS = [{
   code: `statistic`,
   name: `STATISTICS`
 }];
-
-export const SORT_ITEMS = [{
-  code: `default`,
-  name: `DEFAULT`
-}, {
-  code: `date-up`,
-  name: `DATE up`
-}, {
-  code: `date-down`,
-  name: `DATE down`
-}];
