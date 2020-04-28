@@ -69,7 +69,7 @@ export default class Board {
 
     this._sortComponent = new SortComponent();
     this._tasksComponent = new TasksComponent();
-    this._TasksEmptyComponent = new TasksEmptyComponent();
+    this._tasksEmptyComponent = new TasksEmptyComponent();
     this._loadMoreButtonComponent = new LoadMoreButtonComponent();
   }
 
@@ -96,7 +96,7 @@ export default class Board {
     const isAllTasksArchived = tasks.every((task) => task.isArchive);
 
     if (isAllTasksArchived) {
-      render(this._container.getElement(), this._TasksEmptyComponent, RenderPosition.BEFOREEND);
+      render(this._container.getElement(), this._tasksEmptyComponent, RenderPosition.BEFOREEND);
       return;
     }
 
