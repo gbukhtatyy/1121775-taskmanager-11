@@ -1,5 +1,5 @@
+import AbstractComponent from "./abstract-component.js";
 import {SITE_MENU_ITEMS} from "../const.js";
-import {createElement} from "../utils.js";
 
 const createSiteMenuMarkup = (item, isChecked) => {
   const {code, name} = item;
@@ -25,26 +25,8 @@ const createSiteMenuTemplate = (menuItems) => {
   );
 };
 
-export default class SiteMenu {
-  constructor() {
-    this._menuItems = SITE_MENU_ITEMS;
-
-    this._element = null;
-  }
-
+export default class SiteMenu extends AbstractComponent {
   getTemplate() {
-    return createSiteMenuTemplate(this._menuItems);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
+    return createSiteMenuTemplate(SITE_MENU_ITEMS);
   }
 }
