@@ -38,6 +38,7 @@ export default class Sort extends AbstractComponent {
     super();
 
     this._items = SORT_ITEMS;
+    this._currentSortType = SortType.DEFAULT;
   }
 
   getTemplate() {

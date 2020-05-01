@@ -18,14 +18,6 @@ const DefaultRepeatingDays = {
 };
 
 const generateRepeatingDays = () => {
-  let randomRepeatingDays = {};
-
-  for (let day in DefaultRepeatingDays) {
-    if (Object.prototype.hasOwnProperty.call(randomRepeatingDays, day)) {
-      randomRepeatingDays[day] = getRandomInt();
-    }
-  }
-
   return Object.assign({}, DefaultRepeatingDays, {"mo": getRandomInt()});
 };
 
