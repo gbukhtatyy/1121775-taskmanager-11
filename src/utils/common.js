@@ -1,13 +1,4 @@
-import {MONTH_NAMES} from "../const.js";
-
-/**
- * Getting a number with 0 in front if value <10
- * @param {number} value
- * @return {string}
- */
-const castTimeFormat = (value) => {
-  return value < 10 ? `0${value}` : value;
-};
+import moment from "moment";
 
 /**
 * Getting a random number in a given range
@@ -73,7 +64,7 @@ export const getRandomDate = () => {
  * @return {string}
  */
 export const formatDate = (date) => {
-  return (`${date.getDate()} ${MONTH_NAMES[date.getMonth()]}`);
+  return moment(date).format(`DD MMMM`);
 };
 
 /**
@@ -82,8 +73,5 @@ export const formatDate = (date) => {
  * @return {string}
  */
 export const formatTime = (date) => {
-  const hours = castTimeFormat(date.getHours() % 12);
-  const minutes = castTimeFormat(date.getMinutes());
-
-  return `${hours}:${minutes}`;
+  return moment(date).format(`hh:mm`);
 };
