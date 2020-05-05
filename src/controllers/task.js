@@ -16,6 +16,9 @@ export default class Task {
   }
 
   render(task) {
+    const oldTaskComponent = this._taskComponent;
+    const oldTaskEditComponent = this._taskEditComponent;
+
     this._taskComponent = new TaskComponent(task);
     this._taskEditComponent = new TaskEditComponent(task);
 
@@ -40,7 +43,12 @@ export default class Task {
       this._replaceEditToTask();
     });
 
-    render(this._container, this._taskComponent, RenderPosition.BEFOREEND);
+    if (oldTaskEditComponent && oldTaskComponent) {
+      replace(this._taskComponent, oldTaskComponent);
+      replace(this._taskEditComponent, oldTaskEditComponent);
+    } else {
+      render(this._container, this._taskComponent, RenderPosition.BEFOREEND);
+    }
   }
 
   _replaceTaskToEdit() {
